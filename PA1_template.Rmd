@@ -22,7 +22,7 @@ summary(activity_data)
 ## What is mean total number of steps taken per day?
 
 #### Daily Steps Distribution
-```{r hist steps, fig.width=10 }
+```{r Daily Step Histogram excl. NA, fig.width=10 }
 require(ggplot2)
 ggplot(data = activity_data) + 
   geom_histogram(aes(y = steps, x = date), stat = "identity") +
@@ -46,7 +46,7 @@ median(stepsByDate$x, na.rm = TRUE)
 ## What is the average daily activity pattern?
 
 #### Time Series Plot
-```{r fig.width=10}
+```{r Time Plot Daily Activity NA removed, fig.width=10}
 stepsByInterval <- aggregate(activity_data$steps, by = list(interval = activity_data$interval), FUN = mean, na.rm = TRUE)
 ggplot(stepsByInterval) +
   geom_line(aes(y = x, x = interval)) +
@@ -80,7 +80,7 @@ newsteps <- newsteps[, c(2,3,1)]
 ```
 
 #### Daily Steps Distribution - NA's replaced with mean
-```{r hist steps na, fig.width=10}
+```{r Daily Step Histogram NA imputed, fig.width=10}
 require(ggplot2)
 ggplot(data = newsteps) + 
   geom_histogram(aes(y = steps, x = date), stat = "identity") +
@@ -115,7 +115,7 @@ newsteps$dayofweektype <- as.factor(
 ```
 
 #### Steps per Interval - Weekdays vs Weekends 
-```{r}
+```{r Time Plot Weekend v Weekday Activity }
 newstepsByInterval <- aggregate(newsteps$steps, by = list(interval = newsteps$interval, dayofweektype = newsteps$dayofweektype), FUN = mean, na.rm = TRUE)
 ggplot(newstepsByInterval) +
   geom_line(aes(y = x, x = interval)) +

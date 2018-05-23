@@ -55,7 +55,7 @@ ggplot(data = activity_data) +
   ggtitle("Histogram of Total Number of Steps Taken per Day")
 ```
 
-![](figures\hist steps-1.png)<!-- -->
+![](figures\Daily Step Histogram excl. NA-1.png)<!-- -->
 
 ```r
 stepsByDate <- aggregate(activity_data$steps, by = list(date = activity_data$date), FUN = sum )
@@ -93,7 +93,7 @@ ggplot(stepsByInterval) +
   ggtitle("Average Number of Steps Taken in Each Time Interval of the Day")
 ```
 
-![](figures\unnamed-chunk-3-1.png)<!-- -->
+![](figures\Time Plot Daily Activity NA removed-1.png)<!-- -->
 
 #### Peak Activity Period
 
@@ -143,7 +143,7 @@ ggplot(data = newsteps) +
   ggtitle("Histogram of Total Number of Steps Taken per Day")
 ```
 
-![](figures\hist steps na-1.png)<!-- -->
+![](figures\Daily Step Histogram NA imputed-1.png)<!-- -->
 
 ```r
 stepsByDate <- aggregate(newsteps$steps, by = list(date = newsteps$date), FUN = sum )
@@ -194,5 +194,5 @@ ggplot(newstepsByInterval) +
   facet_wrap(~dayofweektype, ncol = 1)
 ```
 
-![](figures\unnamed-chunk-10-1.png)<!-- -->
+![](figures\Time Plot Weekend v Weekday Activity-1.png)<!-- -->
 
