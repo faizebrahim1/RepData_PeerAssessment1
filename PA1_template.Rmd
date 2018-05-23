@@ -6,7 +6,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.path='figures\\')
 ```
 
 ## Loading and preprocessing the data
@@ -22,7 +22,7 @@ summary(activity_data)
 ## What is mean total number of steps taken per day?
 
 #### Daily Steps Distribution
-```{r hist steps, fig.width=10}
+```{r hist steps, fig.width=10 }
 require(ggplot2)
 ggplot(data = activity_data) + 
   geom_histogram(aes(y = steps, x = date), stat = "identity") +
