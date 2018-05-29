@@ -47,19 +47,17 @@ summary(activity_data)
 #### Daily Steps Distribution
 
 ```r
+stepsByDate <- aggregate(activity_data$steps, by = list(date = activity_data$date), FUN = sum )
+
 require(ggplot2)
-ggplot(data = activity_data) + 
-  geom_histogram(aes(y = steps, x = date), stat = "identity") +
-  labs(x = "Date", y = "Average Number of Steps") + 
+ggplot(data = stepsByDate) + 
+  geom_histogram(aes(x)) +
+  labs(x = "Daily Total") + 
   theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_text(angle = 90, hjust = 0.8, vjust = 0.4)) +
   ggtitle("Histogram of Total Number of Steps Taken per Day")
 ```
 
 ![](figures\Daily Step Histogram excl. NA-1.png)<!-- -->
-
-```r
-stepsByDate <- aggregate(activity_data$steps, by = list(date = activity_data$date), FUN = sum )
-```
 #### Average Daily Steps
 
 ```r
@@ -135,19 +133,17 @@ newsteps <- newsteps[, c(2,3,1)]
 #### Daily Steps Distribution - NA's replaced with mean
 
 ```r
+stepsByDate <- aggregate(newsteps$steps, by = list(date = newsteps$date), FUN = sum )
+
 require(ggplot2)
-ggplot(data = newsteps) + 
-  geom_histogram(aes(y = steps, x = date), stat = "identity") +
-  labs(x = "Date", y = "Average Number of Steps") + 
+ggplot(data = stepsByDate) + 
+  geom_histogram(aes(x)) +
+  labs(x = "Daily Total") + 
   theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_text(angle = 90, hjust = 0.8, vjust = 0.4)) +
   ggtitle("Histogram of Total Number of Steps Taken per Day")
 ```
 
 ![](figures\Daily Step Histogram NA imputed-1.png)<!-- -->
-
-```r
-stepsByDate <- aggregate(newsteps$steps, by = list(date = newsteps$date), FUN = sum )
-```
 #### Average Daily Steps
 
 ```r
@@ -168,7 +164,7 @@ median(stepsByDate$x, na.rm = TRUE)
 ## [1] 10641
 ```
 #### Results of Imputing Data
-While it gives our graph more continuity, it doesn't greatly affect the overall picture.
+Increases the daily steps distribution for all
 
 ## Are there differences in activity patterns between weekdays and weekends?
 #### Add a column indicating week or weekend

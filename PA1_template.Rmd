@@ -22,15 +22,17 @@ summary(activity_data)
 ## What is mean total number of steps taken per day?
 
 #### Daily Steps Distribution
-```{r Daily Step Histogram excl. NA, fig.width=10 }
+```{r Daily Step Histogram excl. NA, fig.width=10}
+stepsByDate <- aggregate(activity_data$steps, by = list(date = activity_data$date), FUN = sum )
+
 require(ggplot2)
-ggplot(data = activity_data) + 
-  geom_histogram(aes(y = steps, x = date), stat = "identity") +
-  labs(x = "Date", y = "Average Number of Steps") + 
+ggplot(data = stepsByDate) + 
+  geom_histogram(aes(x)) +
+  labs(x = "Daily Total") + 
   theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_text(angle = 90, hjust = 0.8, vjust = 0.4)) +
   ggtitle("Histogram of Total Number of Steps Taken per Day")
 
-stepsByDate <- aggregate(activity_data$steps, by = list(date = activity_data$date), FUN = sum )
+
 ```
 #### Average Daily Steps
 ```{r}
@@ -81,14 +83,14 @@ newsteps <- newsteps[, c(2,3,1)]
 
 #### Daily Steps Distribution - NA's replaced with mean
 ```{r Daily Step Histogram NA imputed, fig.width=10}
+stepsByDate <- aggregate(newsteps$steps, by = list(date = newsteps$date), FUN = sum )
+
 require(ggplot2)
-ggplot(data = newsteps) + 
-  geom_histogram(aes(y = steps, x = date), stat = "identity") +
-  labs(x = "Date", y = "Average Number of Steps") + 
+ggplot(data = stepsByDate) + 
+  geom_histogram(aes(x)) +
+  labs(x = "Daily Total") + 
   theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_text(angle = 90, hjust = 0.8, vjust = 0.4)) +
   ggtitle("Histogram of Total Number of Steps Taken per Day")
-
-stepsByDate <- aggregate(newsteps$steps, by = list(date = newsteps$date), FUN = sum )
 ```
 #### Average Daily Steps
 ```{r}
@@ -100,7 +102,7 @@ mean(stepsByDate$x, na.rm = TRUE)
 median(stepsByDate$x, na.rm = TRUE)
 ```
 #### Results of Imputing Data
-While it gives our graph more continuity, it doesn't greatly affect the overall picture.
+Increases the daily steps distribution for all
 
 ## Are there differences in activity patterns between weekdays and weekends?
 #### Add a column indicating week or weekend
